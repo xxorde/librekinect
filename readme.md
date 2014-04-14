@@ -2,28 +2,28 @@ What does it do?
 ================
 
 It gives you the depth data from a kinect sensor.
-Its small fast and runs in kernel space, that’s why it works on many low power devices like the raspberry pi!
+Its small, fast and runs in kernel space, that’s why it works on many low power devices like the raspberry pi!
 
 
 How to use? Install
 ===================
 
 PC
-–--
+--
 ```Bash
 make
 make load
 ```
 
 raspberry pi
-–-------------
+-------------
 ```Bash 
 make
 make load
 ```
 
 On PC for raspberry pi:
-–---------------------------
+-----------------------
 ```Bash
 make arm
 scp * pi@pi:
@@ -32,14 +32,14 @@ make load
 ```
 
 But how?
-–----------
+--------
 If you compile the code on the device you want to use it on, you need the kernel source installed and some basic setup. Just search for a guide to compile kernel modules on your OS.
 
 If you want to compile it for a different architecture (PC to pi) you also need a cross compiler. 
 Look for a guide to crosscompile a kernel and modules for a pi.
 
 You want an example for the pi? Here you go!
-–------------------------------------------
+--------------------------------------------
 ```Bash
 apt-get install build-essential bc ncurses-dev tmux
 
