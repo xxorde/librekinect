@@ -1,8 +1,39 @@
-What does it do?
+Description
 ================
+Small and fast kernel driver.
 
-It gives you the depth data from a kinect sensor.
-Its small, fast and runs in kernel space, that’s why it works on many low power devices like the raspberry pi!
+Gives you the depth data from kinect sensors.
+
+Also runs on embedded devices like the raspberry pi.
+
+
+Environment
+=========
+If you compile the code on the device you want to use it on, you need the kernel source installed and some basic setup. Just search for a guide to compile kernel modules on your OS.
+
+If you want to compile it for a different architecture (PC to pi) you also need a cross compiler. 
+Look for a guide to cross compile a kernel and modules for a pi.
+
+Example for the raspberry pi
+--------------------------------------------
+```Bash
+apt-get install build-essential bc ncurses-dev tmux
+
+tmux
+cd /usr/src/
+wget https://github.com/raspberrypi/linux/archive/rpi-3.10.y.tar.gz
+mv linux-rpi-3.10.y linux
+ln -s /usr/src/linux /lib/modules/3.10.25+/build
+ln -s /usr/src/linux /lib/modules/3.10.25+/source
+
+cd /lib/modules/3.10.25+/build
+
+make mrproper
+gzip -dc /proc/config.gz > .config
+make modules_prepare 
+```
+
+That worked on my pi with the current version of Raspbian. It will take some time, if you loose the connection use "tmux attach".
 
 
 Install
@@ -22,7 +53,7 @@ make
 make load
 ```
 
-On PC for raspberry pi
+On PC for raspberry pi:
 -----------------------
 ```Bash
 make arm
@@ -31,47 +62,9 @@ ssh pi@pi
 make load
 ```
 
-But how?
---------
-If you compile the code on the device you want to use it on, you need the kernel source installed and some basic setup. Just search for a guide to compile kernel modules on your OS.
-
-If you want to compile it for a different architecture (PC to pi) you also need a cross compiler. 
-Look for a guide to crosscompile a kernel and modules for a pi.
-
-You want an example for the pi? Here you go!
---------------------------------------------
-The following code worked on my pi with the current version of Raspbian. It will take some time, if you loose the connection use "tmux attach".
-```Bash
-sudo -s
-apt-get install build-essential bc ncurses-dev tmux
-
-tmux
-cd /usr/src/
-wget https://github.com/raspberrypi/linux/archive/rpi-3.10.y.tar.gz
-tar xfvz rpi-3.10.y.tar.gz
-mv linux-rpi-3.10.y linux
-ln -s /usr/src/linux /lib/modules/3.10.25+/build
-ln -s /usr/src/linux /lib/modules/3.10.25+/source
-cd /usr/src/linux
-make mrproper
-gzip -dc /proc/config.gz > .config
-make modules_prepare 
-```
-You might also want to use this kernel to be sure you have no incompatibility problems.
-```Bash
-sudo -s
-cd /usr/src/linux
-make
-make modules_install
-cp /usr/src/linux/arch/arm/boot/zImage /boot/linux-3.10.y
-echo "kernel=linux-3.10.y" >> /boot/config.txt
-reboot
-```
-
 Usage
 =====
-
-After loading the two modules you should have a new "/dev/videoX" which you can use like a web cam.
+After loading the modules you should have a new "/dev/videoX" which you can use like a web cam.
 
 For example:
 ```Bash
@@ -79,22 +72,6 @@ camorama -d /dev/video0
 vlc v4l:///dev/video0
 ```
 
-This looks crappy and is to complicated!
+This looks to complicated!
 =====================================
-You are right!
-When I have some time and maybe find help I try to get it in the kernel. Than all you have to do is plug your USB cable in.
-But to do so the gspca framework has to be changed and I have to merge my work with the original kinect.c
-
-I want it now!
--------------
-No problem!
-Please send my about 5 Instagramm or 0.25 Whatsapp.
-
-Do you have pre compiled modules?
-=============================
-Yes, I am going to upload them after I have added some "special" features :P
-
-Just kidding, but they might not work for you.
-
-If you are using Raspbian and have a 3.10.y Kernel you may be lucky.
-Do not forget to load videodev with ```modprobe videodev```.
+But it's not! Try it!
