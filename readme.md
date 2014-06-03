@@ -115,6 +115,34 @@ vlc v4l:///dev/video0
 
 This is the standard in linux. You can use it with virtually every program or library, for example OpenCV. 
 
-This looks to complicated!
-=====================================
+This looks complicated!
+=======================
 But it's not! Try it!
+
+
+Troubleshooting
+===============
+
+
+I have a /dev/video0 but I do not get data
+------------------------------------------
+
+1. Check your kinect power supply. It needs additional 12V.
+
+2. Maybe it takes to much from the raspberry's 5V too, try an active USB hub.
+
+
+"make" fails
+-------------
+
+
+1. Check if you have the needed tools (gcc ect.)
+
+2. Do you have the kernel sources? Are they at the right place?
+
+
+
+"make load" fails
+------------------
+
+Is the kernel compatible to the sources you use? Compile a kernel and load it.
