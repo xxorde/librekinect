@@ -71,7 +71,7 @@ mv linux-rpi-3.12.y linux
 
 ln -s /usr/src/linux /lib/modules/$(uname -r)/build
 ln -s /usr/src/linux /lib/modules/$(uname -r)/source 
-cd /src/linux
+cd /usr/src/linux
 
 make mrproper
 
