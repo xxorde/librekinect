@@ -21,14 +21,10 @@ else
 endif
 
 default:
-	make pc
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 
 arm:
 	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS) -C $(ARMKDIR) M=$(PWD) modules
-
-
-pc:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 
 unload_drivers:
 	sudo sh unload_drivers.sh
@@ -45,6 +41,9 @@ load:
 	sudo insmod kinect.ko
 	sudo chown -f -R $(USER):$(USER) /dev/video* 
 	sudo chmod -f 755 /dev/video*
+
+show_loaded:
+	lsmod | grep kinect || true 
 
 fi:
 	make fix-rights

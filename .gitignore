@@ -1,3 +1,11 @@
+# ignore c stuff
+*.o
+*.ko
+*.cmd
+*.mod.*
+.tmp_versions
+modules.order
+Module.symvers
 #ignore thumbnails created by windows
 Thumbs.db
 #ignore Desktop Service Store files created by mac
