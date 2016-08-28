@@ -75,6 +75,9 @@ cd /usr/src/linux
 
 make mrproper
 
+# If using Kernel >= 4.x.x execute:
+sudo modprobe configs
+
 # get your config
 gzip -dc /proc/config.gz > .config
 
